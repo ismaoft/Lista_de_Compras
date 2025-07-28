@@ -1,0 +1,28 @@
+﻿@model ListaDeCompras.Models.Producto
+
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+<h1 class="text-light">Eliminar Producto</h1>
+<hr class="border-secondary" />
+
+<h4 class="text-light">¿Estás seguro que deseas eliminar el siguiente producto?</h4>
+<div class="border rounded p-3 bg-dark text-light mb-3">
+    <dl class="row">
+        <dt class="col-sm-3">Nombre:</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">Descripción:</dt>
+        <dd class="col-sm-9">@Model.Descripcion</dd>
+
+        <dt class="col-sm-3">Fecha de Creación:</dt>
+        <dd class="col-sm-9">@Model.FechaCreacion.ToString("f", new System.Globalization.CultureInfo("es-CR"))</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

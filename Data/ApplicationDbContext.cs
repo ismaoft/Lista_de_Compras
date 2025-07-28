@@ -9,5 +9,8 @@ namespace ListaDeCompras.Data
             : base(options)
         {
         }
+        public DbSet<ListaDeCompras.Models.Producto> Producto { get; set; } = default!;
+
     }
+
 }

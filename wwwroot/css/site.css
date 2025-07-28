@@ -18,5 +18,30 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+.custom-dark-nav {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
+.navbar a.nav-link:hover {
+    color: #00d4ff;
+}
+
+.nav {
+    background-color: #121212;
+    color: #f1f1f1;
+    border-bottom: 1px solid #444;
+}
+.form-control, .form-select {
+    background-color: #1f1f1f;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+.btn {
+    margin-right: 0.3rem;
 }
