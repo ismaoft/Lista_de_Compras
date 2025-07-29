@@ -17,7 +17,11 @@
 
         <dt class="col-sm-3">Fecha de Creación:</dt>
         <dd class="col-sm-9">@Model.FechaCreacion.ToString("f", new System.Globalization.CultureInfo("es-CR"))</dd>
+
+        <dt class="col-sm-3">Creado por:</dt>
+        <dd class="col-sm-9">@Model.Usuario?.UserName</dd>
     </dl>
+
 </div>
 
 <div class="mt-3">
