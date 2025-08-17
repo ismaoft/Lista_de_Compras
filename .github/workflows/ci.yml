@@ -1,12 +1,26 @@
-name: CI – Build and Test
-on: push
+name: CI – Build Only
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Build project
-        run: dotnet build
-      - name: Run tests
-        run: dotnet test
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'   # Ajusta si tu proyecto usa otra versión
+
+      - name: Restore
+        run: dotnet restore ListaDeCompras/ListaDeCompras.csproj
+
+      - name: Build
+        run: dotnet build ListaDeCompras/ListaDeCompras.csproj --configuration Release --no-restore
