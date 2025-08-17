@@ -64,9 +64,6 @@ namespace ListaDeCompras.Controllers
 
             if (producto == null) return NotFound();
 
-            if (producto.Usuario?.UserName != User.Identity?.Name)
-                return Forbid(); // Bloquea si el usuario no es el dueño
-
             return View(producto);
         }
 
@@ -96,9 +93,6 @@ namespace ListaDeCompras.Controllers
 
             if (producto == null) return NotFound();
 
-            if (producto.Usuario?.UserName != User.Identity?.Name)
-                return Forbid();
-
             return View(producto);
         }
 
@@ -121,7 +115,7 @@ namespace ListaDeCompras.Controllers
             if (id == null) return NotFound();
 
             var producto = await _context.Producto
-                .Include(p => p.Usuario) // <-- También aquí
+                .Include(p => p.Usuario)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (producto == null) return NotFound();

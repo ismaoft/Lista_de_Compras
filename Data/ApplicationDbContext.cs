@@ -13,5 +13,6 @@ namespace ListaDeCompras.Data
         }
 
         public DbSet<Producto> Producto { get; set; } = default!;
+        public DbSet<Mascota> Mascota { get; set; } = default!;
     }
 }
