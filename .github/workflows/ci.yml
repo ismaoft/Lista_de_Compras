@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,10 +16,16 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'   # Ajusta si tu proyecto usa otra versión
+          dotnet-version: '8.0.x'  # Ajusta si usas otra versión
+
+      # (Opcional) Mostrar .csproj encontrados para depurar rutas
+      - name: List csproj files
+        run: |
+          pwd
+          find . -maxdepth 2 -name "*.csproj" -print
 
       - name: Restore
-        run: dotnet restore ListaDeCompras/ListaDeCompras.csproj
+        run: dotnet restore ./ListaDeCompras.csproj
 
       - name: Build
-        run: dotnet build ListaDeCompras/ListaDeCompras.csproj --configuration Release --no-restore
+        run: dotnet build ./ListaDeCompras.csproj --configuration Release --no-restore
