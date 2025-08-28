@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_listacompras
+    environment:
+      SA_PASSWORD: "Your_Strong_Password_123!"  # Cambia por una contraseña segura
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"  # Usar versión Express para producción (gratuita)
+    ports:
+      - "1433:1433"
+    networks:
+      - appnetwork
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: unless-stopped  # Para que se reinicie automáticamente
+
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"  # Mapear al puerto 80 estándar HTTP
+    depends_on:
+      - sqlserver
+    networks:
+      - appnetwork
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production  # Cambiar a producción
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=ListaDeComprasDb;User Id=sa;Password=Your_Strong_Password_123!;TrustServerCertificate=True;
+    restart: unless-stopped
+    # Agregar variables para optimizar ASP.NET en producción
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - ASPNETCORE_ENVIRONMENT=Production
+
+volumes:
+  sql_data:
+
+networks:
+  appnetwork:
+    driver: bridge
